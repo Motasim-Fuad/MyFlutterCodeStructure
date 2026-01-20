@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 
-// =========================================
-// EMPTY WIDGET - Empty state show kore
-// =========================================
 class EmptyWidget extends StatelessWidget {
-  final IconData icon; // Icon
-  final String message; // Main message
-  final String? subMessage; // Sub message (optional)
+  final IconData icon;
+  final String message;
+  final String? subMessage;
 
   const EmptyWidget({
     Key? key,
@@ -38,7 +35,7 @@ class EmptyWidget extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            // Sub message (jodi thake)
+            //Sub Message
             if (subMessage != null) ...[
               const SizedBox(height: 8),
               Text(

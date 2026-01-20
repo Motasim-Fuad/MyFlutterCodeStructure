@@ -11,16 +11,16 @@ import '../../../auth/data/models/user_model.dart';
 class ProfileRemoteDataSource {
   final ApiClient apiClient;
 
-  // ✅ ADDED: Both storage services
+  // Both storage services
   final SecureStorageService _secureStorage = SecureStorageService();
   final LocalStorageService _localStorage = LocalStorageService();
 
-  // ✅ FIXED: Removed storageService parameter
+  // Removed storageService parameter
   ProfileRemoteDataSource({
     required this.apiClient,
   });
 
-  // ====== GET PROFILE ======
+  // GET PROFILE
   Future<UserModel> getProfile() async {
     final response = await apiClient.get(ApiEndpoints.profile);
 
@@ -36,7 +36,7 @@ class ProfileRemoteDataSource {
     }
   }
 
-  // ====== UPDATE PROFILE ======
+  // UPDATE PROFILE
   Future<UserModel> updateProfile({
     String? name,
     String? phone,

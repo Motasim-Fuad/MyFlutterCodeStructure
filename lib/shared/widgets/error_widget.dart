@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
-// =========================================
-// ERROR WIDGET - Error state show kore
-// =========================================
 class CustomErrorWidget extends StatelessWidget {
-  final String message; // Error message
-  final VoidCallback onRetry; // Retry callback
+  final String message;
+  final VoidCallback onRetry;
 
   const CustomErrorWidget({
     Key? key,

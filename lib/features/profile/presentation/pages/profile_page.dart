@@ -8,9 +8,6 @@ import '../../../../shared/widgets/loading_widget.dart';
 import '../../../../shared/widgets/error_widget.dart';
 import '../../../../shared/widgets/custom_button.dart';
 
-// =========================================
-// PROFILE PAGE - UI
-// =========================================
 class ProfilePage extends GetView<ProfileController> {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -58,7 +55,7 @@ class ProfilePage extends GetView<ProfileController> {
     );
   }
 
-  // ====== BUILD PROFILE CONTENT ======
+  //BUILD PROFILE CONTENT
   Widget _buildProfileContent(BuildContext context) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
@@ -84,7 +81,7 @@ class ProfilePage extends GetView<ProfileController> {
     );
   }
 
-  // ====== BUILD PROFILE PICTURE ======
+  // BUILD PROFILE PICTURE
   Widget _buildProfilePicture() {
     return Stack(
       children: [
@@ -98,12 +95,12 @@ class ProfilePage extends GetView<ProfileController> {
           ),
           child: ClipOval(
             child: controller.selectedImage.value != null
-            // Selected image (jodi noya image select kora hoy)
+            // Selected image
                 ? Image.file(
               controller.selectedImage.value!,
               fit: BoxFit.cover,
             )
-            // Profile picture (API theke)
+            // Profile picture (Throw API)
                 : controller.profile.value?.profilePicture != null
                 ? CachedNetworkImage(
               imageUrl: controller.profile.value!.profilePicture!,
@@ -144,8 +141,7 @@ class ProfilePage extends GetView<ProfileController> {
     );
   }
 
-  // ====== BUILD PROFILE INFO ======
-  // View mode - info display
+  // BUILD PROFILE INFO
   Widget _buildProfileInfo(BuildContext context) {
     final profile = controller.profile.value!;
     return Card(
@@ -172,7 +168,7 @@ class ProfilePage extends GetView<ProfileController> {
     );
   }
 
-  // ====== BUILD INFO ROW ======
+  // BUILD INFO ROW
   Widget _buildInfoRow(IconData icon, String label, String value) {
     return Row(
       children: [
@@ -204,8 +200,7 @@ class ProfilePage extends GetView<ProfileController> {
     );
   }
 
-  // ====== BUILD EDIT FORM ======
-  // Edit mode - form display
+  // BUILD EDIT FORM
   Widget _buildEditForm(BuildContext context) {
     return Column(
       children: [
@@ -252,7 +247,7 @@ class ProfilePage extends GetView<ProfileController> {
     );
   }
 
-  // ====== BUILD LOGOUT BUTTON ======
+  // BUILD LOGOUT BUTTON
   Widget _buildLogoutButton(BuildContext context) {
     final authController = Get.find<AuthController>();
     return CustomButton(

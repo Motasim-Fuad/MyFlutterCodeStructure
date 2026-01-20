@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
-// =========================================
-// CUSTOM BOTTOM NAV - Bottom navigation
-// =========================================
 class CustomBottomNav extends StatelessWidget {
-  final int currentIndex; // Currently selected index
-  final Function(int) onTap; // Tap callback
+  final int currentIndex;
+  final Function(int) onTap;
 
   const CustomBottomNav({
     Key? key,

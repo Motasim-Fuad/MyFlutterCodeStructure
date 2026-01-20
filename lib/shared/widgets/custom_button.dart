@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
-// =========================================
+
 // ICON POSITION - Left or Right
-// =========================================
 enum IconPosition { left, right }
 
-// =========================================
-// CUSTOM BUTTON - Apnar existing button
-// =========================================
+
 class CustomButton extends StatelessWidget {
   // ====== PROPERTIES ======
   final bool loading; // Loading state
@@ -50,7 +47,6 @@ class CustomButton extends StatelessWidget {
         height: height,
         width: width,
         decoration: BoxDecoration(
-          // Gradient thakle gradient, na hole solid color
           gradient: gradientColors != null
               ? LinearGradient(
             colors: gradientColors!,
@@ -63,7 +59,7 @@ class CustomButton extends StatelessWidget {
         ),
         child: Center(
           child: loading
-          // ====== LOADING STATE ======
+          // LOADING STATE
               ? Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
@@ -91,7 +87,7 @@ class CustomButton extends StatelessWidget {
                 ),
             ],
           )
-          // ====== NORMAL STATE ======
+          //NORMAL STATE
               : Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,

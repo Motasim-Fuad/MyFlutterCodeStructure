@@ -6,45 +6,40 @@ import '../../domain/repositories/profile_repository.dart';
 import '../../../auth/data/models/user_model.dart';
 import '../../../auth/presentation/controllers/auth_controller.dart';
 
-// =========================================
+
 // PROFILE LOADING STATE
-// =========================================
+
 enum ProfileLoadingState { initial, loading, success, error }
 
-// =========================================
-// PROFILE CONTROLLER
-// =========================================
 class ProfileController extends GetxController {
   final ProfileRepository repository;
 
   ProfileController({required this.repository});
 
-  // ====== OBSERVABLES ======
+  //OBSERVABLES
   final loadingState = ProfileLoadingState.initial.obs;
   final Rxn<UserModel> profile = Rxn<UserModel>(); // Current profile
   final RxString errorMessage = ''.obs;
   final isUpdating = false.obs; // Update loading
 
-  // ====== EDIT MODE ======
+  //  EDIT MODE
   final isEditMode = false.obs; // Edit mode on/off
   final Rxn<File> selectedImage = Rxn<File>(); // Selected image
 
-  // ====== FORM CONTROLLERS ======
+  //  FORM CONTROLLERS
   final nameController = TextEditingController();
   final phoneController = TextEditingController();
 
   // Image picker instance
   final ImagePicker _picker = ImagePicker();
 
-  // ====== ON INIT ======
   @override
   void onInit() {
     super.onInit();
     loadProfile(); // Profile load
   }
 
-  // ====== LOAD PROFILE ======
-  // 🔴 APNI EITA CONTROL KORBEN
+  //LOAD PROFILE
   Future<void> loadProfile() async {
     loadingState.value = ProfileLoadingState.loading;
 
@@ -72,7 +67,7 @@ class ProfileController extends GetxController {
     );
   }
 
-  // ====== TOGGLE EDIT MODE ======
+  // TOGGLE EDIT MODE
   // Edit button e click korle on/off
   void toggleEditMode() {
     isEditMode.value = !isEditMode.value;
@@ -85,8 +80,7 @@ class ProfileController extends GetxController {
     }
   }
 
-  // ====== PICK IMAGE ======
-  // Gallery theke image select
+  // PICK IMAGE
   Future<void> pickImage() async {
     final XFile? image = await _picker.pickImage(
       source: ImageSource.gallery,
@@ -99,7 +93,6 @@ class ProfileController extends GetxController {
   }
 
   // ====== UPDATE PROFILE ======
-  // 🔴 APNI EITA CONTROL KORBEN
   Future<void> updateProfile() async {
     final name = nameController.text.trim();
     final phone = phoneController.text.trim();
@@ -115,7 +108,7 @@ class ProfileController extends GetxController {
       return;
     }
 
-    // Update shuru
+    // Update Start
     isUpdating.value = true;
 
     // Repository call

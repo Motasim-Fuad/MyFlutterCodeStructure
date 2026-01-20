@@ -6,15 +6,13 @@ import '../../domain/repositories/profile_repository.dart';
 import '../datasources/profile_remote_datasource.dart';
 import '../../../auth/data/models/user_model.dart';
 
-// =========================================
-// PROFILE REPOSITORY IMPLEMENTATION
-// =========================================
+
 class ProfileRepositoryImpl implements ProfileRepository {
   final ProfileRemoteDataSource remoteDataSource;
 
   ProfileRepositoryImpl({required this.remoteDataSource});
 
-  // ====== GET PROFILE IMPLEMENTATION ======
+  // GET PROFILE IMPLEMENTATION
   @override
   Future<Either<Failure, UserModel>> getProfile() async {
     try {
@@ -27,7 +25,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
     }
   }
 
-  // ====== UPDATE PROFILE IMPLEMENTATION ======
+  // UPDATE PROFILE IMPLEMENTATION
   @override
   Future<Either<Failure, UserModel>> updateProfile({
     String? name,

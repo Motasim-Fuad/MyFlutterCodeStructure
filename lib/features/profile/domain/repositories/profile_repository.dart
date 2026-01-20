@@ -3,17 +3,16 @@ import 'package:dartz/dartz.dart';
 import '../../../../core/error/failures.dart';
 import '../../../auth/data/models/user_model.dart';
 
-// =========================================
-// PROFILE REPOSITORY INTERFACE
-// =========================================
+//PROFILE REPOSITORY INTERFACE
+
 abstract class ProfileRepository {
-  // Profile get koro
+  // Get Profile
   Future<Either<Failure, UserModel>> getProfile();
 
-  // Profile update koro (name, phone, image)
+  //Update Profile
   Future<Either<Failure, UserModel>> updateProfile({
     String? name,
     String? phone,
-    File? profilePicture, // Image file (nullable)
+    File? profilePicture,
   });
 }

@@ -1,20 +1,11 @@
-// =====================================================
-// FILE: lib/shared/widgets/language_selector.dart
-// =====================================================
+
 // WHY: Reusable language selector component
 // USAGE: Can be used anywhere in app (AppBar, Drawer, Settings)
-// =====================================================
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../core/config/localization/localization_config.dart';
 import '../../core/utils/logger.dart';
-
-// =====================================================
-// LANGUAGE SELECTOR DROPDOWN
-// =====================================================
-// USAGE: LanguageSelector.dropdown()
-// =====================================================
 
 class LanguageSelector extends StatelessWidget {
   final bool showLabel;
@@ -70,11 +61,6 @@ class LanguageSelector extends StatelessWidget {
   }
 }
 
-// =====================================================
-// LANGUAGE SELECTOR BUTTON
-// =====================================================
-// USAGE: LanguageSelector.button()
-// =====================================================
 
 class LanguageSelectorButton extends StatelessWidget {
   const LanguageSelectorButton({Key? key}) : super(key: key);
@@ -124,11 +110,6 @@ class LanguageSelectorButton extends StatelessWidget {
   }
 }
 
-// =====================================================
-// LANGUAGE SELECTOR LIST TILE
-// =====================================================
-// USAGE: LanguageSelector.listTile() - For Drawer/Settings
-// =====================================================
 
 class LanguageSelectorListTile extends StatelessWidget {
   const LanguageSelectorListTile({Key? key}) : super(key: key);

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-// =========================================
-// LOADING WIDGET - Loading state show kore
-// =========================================
+
 class LoadingWidget extends StatelessWidget {
-  final String message; // Loading message
+  final String message;
 
   const LoadingWidget({
     Key? key,

@@ -27,13 +27,13 @@ class SettingsPage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          // ====== THEME SECTION ======
+          //THEME SECTION
           _buildSectionTitle(TranslationKeys.theme.tr),
           const SizedBox(height: 8),
           _buildThemeCard(themeService),
           const SizedBox(height: 24),
 
-          // ====== LANGUAGE SECTION ======
+          //LANGUAGE SECTION
           _buildSectionTitle(TranslationKeys.language.tr),
           const SizedBox(height: 8),
           _buildLanguageCard(),
@@ -42,7 +42,7 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // ====== SECTION TITLE ======
+  //SECTION TITLE
   Widget _buildSectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.only(left: 16),
@@ -57,7 +57,7 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // ====== THEME CARD ======
+  //THEME CARD
   Widget _buildThemeCard(ThemeService themeService) {
     return Card(
       child: Column(
@@ -69,7 +69,7 @@ class SettingsPage extends StatelessWidget {
             onChanged: (mode) {
               if (mode != null) {
                 themeService.changeThemeMode(mode);
-                AppLogger.info('🎨 Theme changed to: Light');
+                AppLogger.info('Theme changed to: Light');
               }
             },
             title: Text(TranslationKeys.lightMode.tr),
@@ -85,7 +85,7 @@ class SettingsPage extends StatelessWidget {
             onChanged: (mode) {
               if (mode != null) {
                 themeService.changeThemeMode(mode);
-                AppLogger.info('🎨 Theme changed to: Dark');
+                AppLogger.info('Theme changed to: Dark');
               }
             },
             title: Text(TranslationKeys.darkMode.tr),
@@ -101,7 +101,7 @@ class SettingsPage extends StatelessWidget {
             onChanged: (mode) {
               if (mode != null) {
                 themeService.changeThemeMode(mode);
-                AppLogger.info('🎨 Theme changed to: System');
+                AppLogger.info('Theme changed to: System');
               }
             },
             title: Text(TranslationKeys.systemDefault.tr),
@@ -112,7 +112,7 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // ====== LANGUAGE CARD - REUSABLE VERSION ======
+  // LANGUAGE CARD
   Widget _buildLanguageCard() {
     // Get all available locales
     final localeOptions = LocalizationConfig.getLocaleOptions();
@@ -129,7 +129,7 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // ====== LANGUAGE TILE ======
+  // LANGUAGE TILE
   Widget _buildLanguageTile(LocaleOption option) {
     return ListTile(
       leading: Text(
@@ -145,7 +145,7 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  // ====== CHANGE LANGUAGE - REUSABLE ======
+  //CHANGE LANGUAGE
   Future<void> _changeLanguage(LocaleOption option) async {
     try {
       // Use centralized locale change
