@@ -13,7 +13,6 @@ class AuthInterceptor extends Interceptor {
       RequestInterceptorHandler handler,
       ) async {
     try {
-      // LOGIN & REGISTER endpoint skip koro - token lagbe na
       final isAuthEndpoint = options.path.contains('/auth/login') ||
           options.path.contains('/auth/register') ||
           options.path.contains('/auth/refresh');
@@ -31,7 +30,7 @@ class AuthInterceptor extends Interceptor {
 
       handler.next(options);
     } catch (e) {
-      handler.next(options); // Continue without token if error
+      handler.next(options);
     }
   }
 }
