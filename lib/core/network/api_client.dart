@@ -33,28 +33,28 @@ class ApiClient {
 
 
     // ✅ ADD THIS for better error handling
-    _dio.interceptors.add(
-      InterceptorsWrapper(
-        onResponse: (response, handler) {
-          // Handle global success responses
-          return handler.next(response);
-        },
-        onError: (error, handler) async {
-          // Handle 401 Unauthorized - Auto refresh token
-          if (error.response?.statusCode == 401) {
-            // Try to refresh token
-            final newToken = await StorageKeys.refreshToken;
-            if (newToken != null) {
-              // Retry request with new token
-              error.requestOptions.headers['Authorization'] =
-              'Bearer $newToken';
-              return handler.resolve(await _dio.fetch(error.requestOptions));
-            }
-          }
-          return handler.next(error);
-        },
-      ),
-    );
+    // _dio.interceptors.add(
+    //   InterceptorsWrapper(
+    //     onResponse: (response, handler) {
+    //       // Handle global success responses
+    //       return handler.next(response);
+    //     },
+    //     onError: (error, handler) async {
+    //       // Handle 401 Unauthorized - Auto refresh token
+    //       if (error.response?.statusCode == 401) {
+    //         // Try to refresh token
+    //         final newToken = await StorageKeys.refreshToken;
+    //         if (newToken != null) {
+    //           // Retry request with new token
+    //           error.requestOptions.headers['Authorization'] =
+    //           'Bearer $newToken';
+    //           return handler.resolve(await _dio.fetch(error.requestOptions));
+    //         }
+    //       }
+    //       return handler.next(error);
+    //     },
+    //   ),
+    // );
   }
 
   // GET REQUEST

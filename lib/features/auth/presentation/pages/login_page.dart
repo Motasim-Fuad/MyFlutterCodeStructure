@@ -98,36 +98,7 @@ class LoginPage extends GetView<AuthController> {
 
               const SizedBox(height: 24),
 
-              //  DEMO CREDENTIALS INFO =====
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.blue[50],
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: Colors.blue[200]!),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Demo Credentials',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blue[900],
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      'Email: eventadmin@test.com',
-                      style: TextStyle(color: Colors.blue[700]),
-                    ),
-                    Text(
-                      'Password: Your demo password',
-                      style: TextStyle(color: Colors.blue[700]),
-                    ),
-                  ],
-                ),
-              ),
+
             ],
           ),
         ),

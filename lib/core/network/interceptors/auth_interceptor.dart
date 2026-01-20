@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:shop_passport/core/constants/storage_keys.dart';
 import 'package:shop_passport/core/services/secure_storage_service.dart';
@@ -12,9 +11,18 @@ class AuthInterceptor extends Interceptor {
   void onRequest(
       RequestOptions options,
       RequestInterceptorHandler handler,
-      ) async {  // Make async
+      ) async {
     try {
-      //Await the token
+      // ✅ LOGIN & REGISTER endpoint skip koro - token lagbe na
+      final isAuthEndpoint = options.path.contains('/auth/login') ||
+          options.path.contains('/auth/register') ||
+          options.path.contains('/auth/refresh');
+
+      if (isAuthEndpoint) {
+        return handler.next(options); // Token add koro na
+      }
+
+      // Baki shob endpoint e token add koro
       final token = await storage.read(StorageKeys.accessToken);
 
       if (token != null && token.isNotEmpty) {
