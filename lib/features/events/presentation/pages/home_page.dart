@@ -6,9 +6,6 @@ import '../../../../shared/widgets/loading_widget.dart';
 import '../../../../shared/widgets/error_widget.dart';
 import '../../../../shared/widgets/empty_widget.dart';
 
-// =========================================
-// HOME PAGE - Event list show kore
-// =========================================
 class HomePage extends GetView<EventController> {
   const HomePage({Key? key}) : super(key: key);
 
@@ -32,18 +29,18 @@ class HomePage extends GetView<EventController> {
       body: Obx(() {
         // State onujayi different UI show
         switch (controller.loadingState.value) {
-        // ====== LOADING STATE ======
+        //LOADING STATE
           case EventLoadingState.loading:
             return const LoadingWidget(message: 'Loading events...');
 
-        // ====== ERROR STATE ======
+        //ERROR STATE
           case EventLoadingState.error:
             return CustomErrorWidget(
               message: controller.errorMessage.value,
               onRetry: controller.retry, // Retry button
             );
 
-        // ====== EMPTY STATE ======
+        //EMPTY STATE
           case EventLoadingState.empty:
             return const EmptyWidget(
               icon: Icons.event_busy,
@@ -51,7 +48,7 @@ class HomePage extends GetView<EventController> {
               subMessage: 'You haven\'t created any events yet',
             );
 
-        // ====== SUCCESS STATE ======
+        // SUCCESS STATE
           case EventLoadingState.success:
             return RefreshIndicator(
               onRefresh: controller.refreshEvents, // Pull to refresh

@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../data/models/event_model.dart';
 
-// =========================================
-// EVENT CARD - Single event er card
-// =========================================
 class EventCard extends StatelessWidget {
   final EventModel event; // Event data
   final VoidCallback onDelete; // Delete callback
@@ -26,7 +23,7 @@ class EventCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ====== EVENT IMAGE ======
+          //EVENT IMAGE
           ClipRRect(
             borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
             child: event.firstImageUrl.isNotEmpty
@@ -57,7 +54,7 @@ class EventCard extends StatelessWidget {
             ),
           ),
 
-          // ====== EVENT DETAILS ======
+          // EVENT DETAILS
           Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -141,7 +138,8 @@ class EventCard extends StatelessWidget {
                     Expanded(
                       child: OutlinedButton.icon(
                         onPressed: () {
-                          // View details logic ekhane
+                          //TODO
+                          //View details logic
                         },
                         icon: const Icon(Icons.visibility),
                         label: const Text('View'),
@@ -154,7 +152,7 @@ class EventCard extends StatelessWidget {
                     // Delete button
                     Expanded(
                       child: OutlinedButton.icon(
-                        onPressed: onDelete, // Delete callback call
+                        onPressed: onDelete,
                         icon: const Icon(Icons.delete),
                         label: const Text('Delete'),
                         style: OutlinedButton.styleFrom(
@@ -171,9 +169,7 @@ class EventCard extends StatelessWidget {
       ),
     );
   }
-
-  // ====== BUILD STATUS CHIP ======
-  // Status badge widget
+  // BUILD STATUS CHIP
   Widget _buildStatusChip({required String label, required Color color}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),

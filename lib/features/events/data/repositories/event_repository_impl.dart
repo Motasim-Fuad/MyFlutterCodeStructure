@@ -1,20 +1,17 @@
 import 'package:dartz/dartz.dart';
 import 'package:shop_passport/core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
-import '../../../../core/network/api_client.dart';
 import '../../domain/repositories/event_repository.dart';
 import '../datasources/event_remote_datasource.dart';
 import '../models/event_model.dart';
 
-// =========================================
-// EVENT REPOSITORY IMPLEMENTATION
-// =========================================
+
 class EventRepositoryImpl implements EventRepository {
   final EventRemoteDataSource remoteDataSource;
 
   EventRepositoryImpl({required this.remoteDataSource});
 
-  // ====== GET MY EVENTS IMPLEMENTATION ======
+  // GET MY EVENTS IMPLEMENTATION
   @override
   Future<Either<Failure, List<EventModel>>> getMyEvents() async {
     try {
@@ -32,7 +29,7 @@ class EventRepositoryImpl implements EventRepository {
     }
   }
 
-  // ====== DELETE EVENT IMPLEMENTATION ======
+  // DELETE EVENT IMPLEMENTATION
   @override
   Future<Either<Failure, void>> deleteEvent(int eventId) async {
     try {

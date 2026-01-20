@@ -1,6 +1,3 @@
-// =========================================
-// EVENT MODEL - Event er sob data
-// =========================================
 class EventModel {
   final int id;
   final String name;
@@ -10,13 +7,13 @@ class EventModel {
   final String longitude;
   final String fromDate;
   final String toDate;
-  final List<EventImage> images; // Event er images
+  final List<EventImage> images;
   final String adminName;
   final String adminEmail;
   final String adminPhone;
   final int totalShops;
-  final String status; // approved/pending
-  final String eventDateStatus; // ongoing/ended
+  final String status;
+  final String eventDateStatus;
   final String createdAt;
 
   EventModel({
@@ -38,7 +35,7 @@ class EventModel {
     required this.createdAt,
   });
 
-  // ====== FROM JSON ======
+  // FROM JSON
   factory EventModel.fromJson(Map<String, dynamic> json) {
     return EventModel(
       id: json['id'] ?? 0,
@@ -51,8 +48,9 @@ class EventModel {
       toDate: json['to_date'] ?? '',
       // Images array ke EventImage list e convert
       images: (json['images'] as List?)
-          ?.map((e) => EventImage.fromJson(e))
-          .toList() ?? [],
+              ?.map((e) => EventImage.fromJson(e))
+              .toList() ??
+          [],
       adminName: json['admin_name'] ?? '',
       adminEmail: json['admin_email'] ?? '',
       adminPhone: json['admin_phone'] ?? '',
@@ -63,7 +61,7 @@ class EventModel {
     );
   }
 
-  // ====== HELPER METHODS ======
+  //  HELPER METHODS
   // Status check korar shortcut methods
   bool get isApproved => status.toLowerCase() == 'approved';
   bool get isPending => status.toLowerCase() == 'pending';
@@ -74,12 +72,11 @@ class EventModel {
   String get firstImageUrl => images.isNotEmpty ? images.first.image : '';
 }
 
-// =========================================
 // EVENT IMAGE MODEL - Single image
-// =========================================
+
 class EventImage {
   final int id;
-  final String image; // Image URL
+  final String image;
   final String uploadedAt;
 
   EventImage({

@@ -3,9 +3,6 @@ import 'package:get/get.dart';
 import '../../domain/repositories/event_repository.dart';
 import '../../data/models/event_model.dart';
 
-// =========================================
-// EVENT LOADING STATE - UI er different states
-// =========================================
 enum EventLoadingState {
   initial,  // Shuru te
   loading,  // Data load hocche
@@ -14,40 +11,37 @@ enum EventLoadingState {
   empty     // Data nai
 }
 
-// =========================================
-// EVENT CONTROLLER - Event list & delete manage kore
-// =========================================
 class EventController extends GetxController {
   final EventRepository repository;
 
   EventController({required this.repository});
 
-  // ====== OBSERVABLES ======
+  //OBSERVABLES
   final loadingState = EventLoadingState.initial.obs; // Current state
   final RxList<EventModel> events = <EventModel>[].obs; // Event list
   final RxString errorMessage = ''.obs; // Error message
   final isDeleting = false.obs; // Delete loading
 
-  // ====== ON INIT ======
+  //  ON INIT
   @override
   void onInit() {
     super.onInit();
     loadEvents(); // Events load koro
   }
 
-  // ====== LOAD EVENTS ======
+  //  LOAD EVENTS
   Future<void> loadEvents() async {
     loadingState.value = EventLoadingState.loading;
 
     final result = await repository.getMyEvents();
 
     result.fold(
-      // ====== ERROR CASE (Left) ======
+      //  ERROR CASE (Left)
           (failure) {
         loadingState.value = EventLoadingState.error;
         errorMessage.value = failure.message;
       },
-      // ====== SUCCESS CASE (Right) ======
+      // SUCCESS CASE (Right)
           (eventList) {
         if (eventList.isEmpty) {
           loadingState.value = EventLoadingState.empty;
@@ -59,12 +53,12 @@ class EventController extends GetxController {
     );
   }
 
-  // ====== REFRESH EVENTS ======
+  // REFRESH EVENTS
   Future<void> refreshEvents() async {
     await loadEvents();
   }
 
-  // ====== DELETE EVENT (with optional UI) ======
+  //DELETE EVENT
   Future<void> deleteEvent(int eventId) async {
     Get.dialog(
       AlertDialog(
@@ -87,15 +81,13 @@ class EventController extends GetxController {
     );
   }
 
-  // ====== PERFORM DELETE ======
-  // UI free version for unit test
   Future<void> performDelete(int eventId, {bool showSnackbar = true}) async {
     isDeleting.value = true;
 
     final result = await repository.deleteEvent(eventId);
 
     result.fold(
-      // ====== ERROR ======
+      // ERROR
           (failure) {
         isDeleting.value = false;
 
@@ -109,7 +101,7 @@ class EventController extends GetxController {
           );
         }
       },
-      // ====== SUCCESS ======
+      //SUCCESS
           (_) {
         isDeleting.value = false;
         events.removeWhere((event) => event.id == eventId);
@@ -131,7 +123,7 @@ class EventController extends GetxController {
     );
   }
 
-  // ====== RETRY ======
+  //RETRY
   void retry() {
     loadEvents();
   }

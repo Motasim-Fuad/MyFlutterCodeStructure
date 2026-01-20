@@ -43,4 +43,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-lib/example
+lib/example/all_example.dart
+lib/example/user_example.dart
