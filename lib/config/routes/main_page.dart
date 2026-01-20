@@ -6,9 +6,6 @@ import '../../features/events/presentation/pages/home_page.dart';
 import '../../features/profile/presentation/pages/profile_page.dart';
 import '../../shared/widgets/custom_bottom_nav.dart';
 
-// =========================================
-// MAIN PAGE - Bottom navigation container
-// =========================================
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
 

@@ -2,56 +2,26 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/storage_keys.dart';
 
-// =====================================================
-// LOCAL STORAGE SERVICE
-// =====================================================
-// WHY: Handle non-sensitive data with fast access
-//
-// VS SECURE STORAGE:
-// ✅ Faster read/write
-// ✅ No encryption overhead
-// ✅ Better for frequent access
-// ❌ Not encrypted
-// ❌ Not suitable for sensitive data
-//
-// WHEN TO USE:
-// ✅ Theme preference
-// ✅ Language setting
-// ✅ User preferences
-// ✅ App settings
-// ✅ Cache data
-// ✅ Non-sensitive user info
-//
-// WHEN NOT TO USE:
-// ❌ Tokens (use secure storage)
-// ❌ Passwords (use secure storage)
-// ❌ API keys (use secure storage)
-// ❌ Payment info (use secure storage)
-//
-// PERFORMANCE:
-// - Much faster than secure storage
-// - Good for frequently accessed data
-// - Synchronous read after initial load
-// =====================================================
+
 
 class LocalStorageService {
-  // ====== SINGLETON PATTERN ======
+  // SINGLETON PATTERN
   // WHY: Single instance for consistent data access
   static final LocalStorageService _instance = LocalStorageService._internal();
   factory LocalStorageService() => _instance;
   LocalStorageService._internal();
 
-  // ====== SHARED PREFERENCES INSTANCE ======
+  //SHARED PREFERENCES INSTANCE
   SharedPreferences? _prefs;
 
-  // ====== INITIALIZATION ======
+  //INITIALIZATION
   // WHY: Load shared preferences at app startup
-  // Must be called before using service
+  // Must be called before using service .
   Future<void> init() async {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  // ====== ENSURE INITIALIZED ======
+  //ENSURE INITIALIZED
   // WHY: Safety check before operations
   void _ensureInitialized() {
     if (_prefs == null) {
@@ -61,7 +31,7 @@ class LocalStorageService {
     }
   }
 
-  // ====== STRING OPERATIONS ======
+  //STRING OPERATIONS
 
   // Save string
   Future<bool> setString(String key, String value) async {
@@ -75,7 +45,7 @@ class LocalStorageService {
     return _prefs!.getString(key);
   }
 
-  // ====== INT OPERATIONS ======
+  //INT OPERATIONS
 
   Future<bool> setInt(String key, int value) async {
     _ensureInitialized();
@@ -87,7 +57,7 @@ class LocalStorageService {
     return _prefs!.getInt(key);
   }
 
-  // ====== BOOL OPERATIONS ======
+  //BOOL OPERATIONS
 
   Future<bool> setBool(String key, bool value) async {
     _ensureInitialized();
@@ -99,7 +69,7 @@ class LocalStorageService {
     return _prefs!.getBool(key);
   }
 
-  // ====== DOUBLE OPERATIONS ======
+  //DOUBLE OPERATIONS
 
   Future<bool> setDouble(String key, double value) async {
     _ensureInitialized();
@@ -111,7 +81,7 @@ class LocalStorageService {
     return _prefs!.getDouble(key);
   }
 
-  // ====== LIST OPERATIONS ======
+  //LIST OPERATIONS
 
   Future<bool> setStringList(String key, List<String> value) async {
     _ensureInitialized();
@@ -123,7 +93,7 @@ class LocalStorageService {
     return _prefs!.getStringList(key);
   }
 
-  // ====== JSON OPERATIONS ======
+  //JSON OPERATIONS
   // WHY: Store complex objects as JSON strings
 
   Future<bool> setJson(String key, Map<String, dynamic> value) async {
@@ -143,8 +113,7 @@ class LocalStorageService {
     }
   }
 
-  // ====== DELETE OPERATIONS ======
-
+  // DELETE OPERATIONS
   Future<bool> remove(String key) async {
     _ensureInitialized();
     return await _prefs!.remove(key);
@@ -155,7 +124,7 @@ class LocalStorageService {
     return await _prefs!.clear();
   }
 
-  // ====== CHECK OPERATIONS ======
+  // CHECK OPERATIONS
 
   bool containsKey(String key) {
     _ensureInitialized();
@@ -167,7 +136,7 @@ class LocalStorageService {
     return _prefs!.getKeys();
   }
 
-  // ====== CONVENIENCE METHODS ======
+  //CONVENIENCE METHODS
   // WHY: Common operations with predefined keys
 
   // User Data

@@ -2,32 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'local_storage_service.dart';
 
-// =====================================================
-// THEME SERVICE
-// =====================================================
-// WHY: Manage app theme state (light/dark/system)
-// - Persistent theme selection
-// - Easy theme switching
-// - Reactive updates with GetX
-// - System theme detection
-// =====================================================
-
 class ThemeService extends GetxService {
-  // ====== DEPENDENCIES ======
+  //  DEPENDENCIES
   final LocalStorageService _storage = LocalStorageService();
 
-  // ====== THEME MODE ======
+  // THEME MODE
   // WHY: Observable theme mode for reactive UI updates
   final Rx<ThemeMode> _themeMode = ThemeMode.system.obs;
   ThemeMode get themeMode => _themeMode.value;
 
-  // ====== THEME MODE VALUES ======
-  // WHY: Constants for theme mode strings
+  //  THEME MODE VALUES
   static const String light = 'light';
   static const String dark = 'dark';
   static const String system = 'system';
 
-  // ====== INITIALIZATION ======
+  //  INITIALIZATION
   // WHY: Load saved theme preference on app start
   @override
   void onInit() {
@@ -35,7 +24,7 @@ class ThemeService extends GetxService {
     _loadThemeMode();
   }
 
-  // ====== LOAD THEME MODE ======
+  //  LOAD THEME MODE
   // WHY: Restore user's theme preference from storage
   void _loadThemeMode() {
     final savedMode = _storage.getThemeMode();
@@ -58,7 +47,7 @@ class ThemeService extends GetxService {
     }
   }
 
-  // ====== CHANGE THEME MODE ======
+  //CHANGE THEME MODE
   // WHY: Update theme and save preference
   Future<void> changeThemeMode(ThemeMode mode) async {
     // Update observable
@@ -84,7 +73,7 @@ class ThemeService extends GetxService {
     await _storage.setThemeMode(modeString);
   }
 
-  // ====== TOGGLE THEME ======
+  // TOGGLE THEME
   // WHY: Quick switch between light and dark
   // System mode users will get light as default
   Future<void> toggleTheme() async {
@@ -95,7 +84,7 @@ class ThemeService extends GetxService {
     }
   }
 
-  // ====== IS DARK MODE ======
+  //IS DARK MODE
   // WHY: Check current effective theme
   // Considers system preference for system mode
   bool get isDarkMode {
@@ -106,9 +95,9 @@ class ThemeService extends GetxService {
     return Get.isDarkMode;
   }
 
-  // ====== IS LIGHT MODE ======
+  // IS LIGHT MODE
   bool get isLightMode => !isDarkMode;
 
-  // ====== IS SYSTEM MODE ======
+  // IS SYSTEM MODE
   bool get isSystemMode => _themeMode.value == ThemeMode.system;
 }

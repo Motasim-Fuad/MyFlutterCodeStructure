@@ -2,18 +2,9 @@ import 'dart:ui';
 
 import 'package:get/get.dart';
 
-// =====================================================
-// APP TRANSLATIONS
-// =====================================================
-// WHY: Centralized translation management
-// - Easy to add new languages
-// - Type-safe translation keys
-// - Hot reload support
-// - GetX built-in localization
-// =====================================================
 
 class AppTranslations extends Translations {
-  // ====== SUPPORTED LOCALES ======
+  //  SUPPORTED LOCALES
   // WHY: Define which languages your app supports
   static const Locale enUS = Locale('en', 'US');
   static const Locale bnBD = Locale('bn', 'BD');
@@ -29,7 +20,7 @@ class AppTranslations extends Translations {
 
   @override
   Map<String, Map<String, String>> get keys => {
-    // ====== ENGLISH ======
+    // ENGLISH
     'en_US': {
       // General
       'app_name': 'Shop Passport',
@@ -99,7 +90,7 @@ class AppTranslations extends Translations {
       'timeout': 'Connection timeout',
     },
 
-    // ====== BANGLA ======
+    //  BANGLA
     'bn_BD': {
       // General
       'app_name': 'শপ পাসপোর্ট',
@@ -171,14 +162,12 @@ class AppTranslations extends Translations {
   };
 }
 
-// =====================================================
+
 // TRANSLATION KEYS CLASS
-// =====================================================
 // WHY: Type-safe translation keys
 // - Autocomplete support
 // - Prevents typos
 // - Easy refactoring
-// =====================================================
 
 class TranslationKeys {
   TranslationKeys._();

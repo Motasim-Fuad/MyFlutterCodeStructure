@@ -7,9 +7,6 @@ import 'package:shop_passport/features/settings/presentation/pages/settings_page
 import '../../features/auth/presentation/pages/login_page.dart';
 import 'main_page.dart';
 
-// =========================================
-// APP ROUTES - Route names
-// =========================================
 class AppRoutes {
   static const String login = '/login';
   static const String main = '/main';

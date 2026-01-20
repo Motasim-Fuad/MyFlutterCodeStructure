@@ -1,20 +1,11 @@
-// =====================================================
-// STORAGE KEYS
-// =====================================================
+
 // WHY: Centralized storage key management
 // - Prevents typos in keys
 // - Easy to maintain
 // - Clear separation of secure vs non-secure data
-// =====================================================
 
 class StorageKeys {
   StorageKeys._();
-
-  // ====== SECURE STORAGE KEYS ======
-  // WHY: These store sensitive data and use flutter_secure_storage
-  // - Encrypted at rest
-  // - Platform-specific secure storage (Keychain/Keystore)
-  // - Cannot be accessed by other apps
 
   // JWT Access Token
   // WHY: Used for API authentication, needs encryption
@@ -32,12 +23,6 @@ class StorageKeys {
   // WHY: Third-party API keys need secure storage
   static const String apiKey = 'secure_api_key';
 
-
-  // ====== SHARED PREFERENCES KEYS ======
-  // WHY: These store non-sensitive data and use shared_preferences
-  // - Faster than secure storage
-  // - No encryption overhead
-  // - OK for non-critical data
 
   // User Data (non-sensitive info)
   // WHY: User name, email, etc. - not secret but needs persistence

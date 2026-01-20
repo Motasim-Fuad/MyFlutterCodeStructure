@@ -1,9 +1,3 @@
-// =====================================================
-// FILE: lib/core/config/localization/localization_config.dart
-// =====================================================
-// WHY: Single source of truth for all localization setup
-// REUSABLE: Can be used in any Flutter project
-// =====================================================
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -14,7 +8,7 @@ import '../../services/local_storage_service.dart';
 class LocalizationConfig {
   LocalizationConfig._(); // Private constructor for utility class
 
-  // ====== LOCALIZATION DELEGATES ======
+  // LOCALIZATION DELEGATES
   // WHY: Provides built-in Flutter widget translations
   // USAGE: Add to GetMaterialApp's localizationsDelegates
   static const List<LocalizationsDelegate<dynamic>> delegates = [
@@ -23,16 +17,16 @@ class LocalizationConfig {
     GlobalCupertinoLocalizations.delegate, // iOS style widgets
   ];
 
-  // ====== SUPPORTED LOCALES ======
+  // SUPPORTED LOCALES
   // WHY: List of all languages your app supports
   // USAGE: Add to GetMaterialApp's supportedLocales
   static const List<Locale> supportedLocales = AppTranslations.supportedLocales;
 
-  // ====== FALLBACK LOCALE ======
+  //  FALLBACK LOCALE
   // WHY: Default language if saved/device language not found
   static const Locale fallbackLocale = AppTranslations.fallbackLocale;
 
-  // ====== GET INITIAL LOCALE ======
+  // GET INITIAL LOCALE
   // WHY: Smart locale detection (Saved → Device → Fallback)
   // REUSABLE: Works with any locale configuration
   static Locale getInitialLocale() {
@@ -55,7 +49,7 @@ class LocalizationConfig {
     return fallbackLocale;
   }
 
-  // ====== CHANGE LOCALE ======
+  //  CHANGE LOCALE
   // WHY: Centralized locale changing with persistence
   // REUSABLE: Handles locale change + storage in one place
   static Future<void> changeLocale(Locale locale) async {
@@ -72,7 +66,7 @@ class LocalizationConfig {
     await localStorage.setLanguageCode(locale.languageCode);
   }
 
-  // ====== HELPER: GET LOCALE FROM LANGUAGE CODE ======
+  //HELPER: GET LOCALE FROM LANGUAGE CODE
   static Locale? _getLocaleFromLanguageCode(String languageCode) {
     for (final locale in supportedLocales) {
       if (locale.languageCode == languageCode) {
@@ -82,14 +76,14 @@ class LocalizationConfig {
     return null;
   }
 
-  // ====== HELPER: CHECK IF LOCALE IS SUPPORTED ======
+  //  HELPER: CHECK IF LOCALE IS SUPPORTED
   static bool _isSupportedLocale(Locale locale) {
     return supportedLocales.any(
           (l) => l.languageCode == locale.languageCode,
     );
   }
 
-  // ====== GET CURRENT LOCALE NAME ======
+  // GET CURRENT LOCALE NAME
   // WHY: Display language name in UI
   static String getCurrentLocaleName() {
     final locale = Get.locale ?? fallbackLocale;
@@ -103,7 +97,7 @@ class LocalizationConfig {
     }
   }
 
-  // ====== GET ALL LOCALES WITH NAMES ======
+  //  GET ALL LOCALES WITH NAMES
   // WHY: For language selection dropdown/list
   static List<LocaleOption> getLocaleOptions() {
     return [
@@ -123,12 +117,9 @@ class LocalizationConfig {
   }
 }
 
-// =====================================================
 // LOCALE OPTION MODEL
-// =====================================================
 // WHY: Clean data structure for locale options
 // REUSABLE: Can be used in dropdowns, lists, settings
-// =====================================================
 
 class LocaleOption {
   final Locale locale;

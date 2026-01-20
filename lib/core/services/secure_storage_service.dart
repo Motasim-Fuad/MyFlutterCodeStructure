@@ -1,37 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shop_passport/core/constants/storage_keys.dart';
 
-// =====================================================
-// SECURE STORAGE SERVICE
-// =====================================================
-// WHY: Handle sensitive data (tokens, passwords) with encryption
-//
-// SECURITY FEATURES:
-// - iOS: Stored in Keychain with kSecAttrAccessibleAfterFirstUnlock
-// - Android: Encrypted with AES, stored in EncryptedSharedPreferences
-// - Data encrypted at rest
-// - Cannot be accessed without device unlock
-// - Survives app reinstall (on iOS with iCloud backup)
-//
-// WHEN TO USE:
-// ✅ JWT tokens
-// ✅ API keys
-// ✅ User credentials (if must be saved)
-// ✅ Encryption keys
-// ✅ Payment info
-//
-// WHEN NOT TO USE:
-// ❌ Theme preference (use shared_preferences)
-// ❌ Language setting (use shared_preferences)
-// ❌ Non-sensitive user data (use shared_preferences)
-// ❌ Cache data (use shared_preferences or hive)
-//
-// PERFORMANCE:
-// - Slower than SharedPreferences
-// - Use for critical data only
-// - Consider caching frequently accessed data in memory
-// =====================================================
-
 class SecureStorageService {
   // ====== SINGLETON PATTERN ======
   // WHY: Only one instance needed throughout app
@@ -90,7 +59,7 @@ class SecureStorageService {
     );
   }
 
-  // ====== WRITE DATA ======
+  //WRITE DATA
   // WHY: Store encrypted data
   // @param key: Storage key
   // @param value: Data to store (will be encrypted)
@@ -105,7 +74,7 @@ class SecureStorageService {
     }
   }
 
-  // ====== READ DATA ======
+  // READ DATA
   // WHY: Retrieve and decrypt data
   // @returns: Decrypted value or null if not found
   Future<String?> read(String key) async {
@@ -117,7 +86,7 @@ class SecureStorageService {
     }
   }
 
-  // ====== DELETE DATA ======
+  //DELETE DATA
   // WHY: Remove specific key-value pair
   Future<void> delete(String key) async {
     try {
@@ -128,7 +97,7 @@ class SecureStorageService {
     }
   }
 
-  // ====== DELETE ALL DATA ======
+  // DELETE ALL DATA
   // WHY: Clear all secure storage (useful for logout)
   // CAUTION: This deletes ALL encrypted data, not just app-specific
   Future<void> deleteAll() async {
@@ -140,7 +109,7 @@ class SecureStorageService {
     }
   }
 
-  // ====== CHECK IF KEY EXISTS ======
+  //  CHECK IF KEY EXISTS
   // WHY: Verify if data exists before reading
   Future<bool> containsKey(String key) async {
     try {
@@ -151,7 +120,7 @@ class SecureStorageService {
     }
   }
 
-  // ====== READ ALL DATA ======
+  // READ ALL DATA
   // WHY: Get all stored key-value pairs
   // Use carefully - can be slow with many items
   Future<Map<String, String>> readAll() async {
@@ -163,30 +132,29 @@ class SecureStorageService {
     }
   }
 
-  // ====== SAVE ACCESS TOKEN ======
+  //  SAVE ACCESS TOKEN
   // WHY: Convenience method for common operation
   // Encapsulates storage key logic
   Future<void> saveAccessToken(String token) async {
     await write(StorageKeys.accessToken, token);
   }
 
-  // ====== GET ACCESS TOKEN ======
+  // GET ACCESS TOKEN
   Future<String?> getAccessToken() async {
     return await read(StorageKeys.accessToken);
   }
 
-  // ====== SAVE REFRESH TOKEN ======
+  // SAVE REFRESH TOKEN
   Future<void> saveRefreshToken(String token) async {
     await write(StorageKeys.refreshToken, token);
   }
 
-  // ====== GET REFRESH TOKEN ======
+  //  GET REFRESH TOKEN
   Future<String?> getRefreshToken() async {
     return await read(StorageKeys.refreshToken);
   }
 
-  // ====== DELETE TOKENS ======
-  // WHY: Clear auth tokens on logout
+  //  DELETE TOKENS
   Future<void> deleteTokens() async {
     await delete(StorageKeys.accessToken);
     await delete(StorageKeys.refreshToken);

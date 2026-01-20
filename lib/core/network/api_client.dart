@@ -5,12 +5,8 @@ import 'package:shop_passport/core/services/secure_storage_service.dart';
 import '../constants/api_endpoints.dart';
 import 'interceptors/auth_interceptor.dart';
 
-// =========================================
-// API CLIENT - Sob API calls ekhane theke hoy
-// =========================================
 class ApiClient {
   late Dio _dio; // Dio instance
-  // final GetStorage _storage = GetStorage(); // Local storage
   final _secureStorage = SecureStorageService();
 
   // Constructor - Dio setup kore
@@ -37,32 +33,31 @@ class ApiClient {
 
 
     // ✅ ADD THIS for better error handling
-    // _dio.interceptors.add(
-    //   InterceptorsWrapper(
-    //     onResponse: (response, handler) {
-    //       // Handle global success responses
-    //       return handler.next(response);
-    //     },
-    //     onError: (error, handler) async {
-    //       // Handle 401 Unauthorized - Auto refresh token
-    //       if (error.response?.statusCode == 401) {
-    //         // Try to refresh token
-    //         final newToken = await StorageKeys.refreshToken();
-    //         if (newToken != null) {
-    //           // Retry request with new token
-    //           error.requestOptions.headers['Authorization'] =
-    //           'Bearer $newToken';
-    //           return handler.resolve(await _dio.fetch(error.requestOptions));
-    //         }
-    //       }
-    //       return handler.next(error);
-    //     },
-    //   ),
-    // );
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onResponse: (response, handler) {
+          // Handle global success responses
+          return handler.next(response);
+        },
+        onError: (error, handler) async {
+          // Handle 401 Unauthorized - Auto refresh token
+          if (error.response?.statusCode == 401) {
+            // Try to refresh token
+            final newToken = await StorageKeys.refreshToken;
+            if (newToken != null) {
+              // Retry request with new token
+              error.requestOptions.headers['Authorization'] =
+              'Bearer $newToken';
+              return handler.resolve(await _dio.fetch(error.requestOptions));
+            }
+          }
+          return handler.next(error);
+        },
+      ),
+    );
   }
 
-  // ====== GET REQUEST ======
-  // Usage: apiClient.get('/api/events/')
+  // GET REQUEST
   Future<Response> get(String endpoint, {Map<String, dynamic>? queryParams}) async {
     try {
       return await _dio.get(endpoint, queryParameters: queryParams);
@@ -71,8 +66,7 @@ class ApiClient {
     }
   }
 
-  // ====== POST REQUEST ======
-  // Usage: apiClient.post('/api/login/', data: {'email': '...', 'password': '...'})
+  //POST REQUEST
   Future<Response> post(String endpoint, {dynamic data}) async {
     try {
       return await _dio.post(endpoint, data: data);
@@ -81,8 +75,7 @@ class ApiClient {
     }
   }
 
-  // ====== PUT REQUEST ======
-  // Usage: apiClient.put('/api/profile/', data: {'name': 'New Name'})
+  // PUT REQUEST
   Future<Response> put(String endpoint, {dynamic data}) async {
     try {
       return await _dio.put(endpoint, data: data);
@@ -91,8 +84,7 @@ class ApiClient {
     }
   }
 
-  // ====== DELETE REQUEST ======
-  // Usage: apiClient.delete('/api/events/14/')
+  // DELETE REQUEST
   Future<Response> delete(String endpoint) async {
     try {
       return await _dio.delete(endpoint);
@@ -101,9 +93,7 @@ class ApiClient {
     }
   }
 
-  // ====== MULTIPART POST ======
-  // File upload er jonno (Profile picture, etc)
-  // Usage: apiClient.postMultipart('/api/profile/', formData: formData)
+  //MULTIPART POST
   Future<Response> postMultipart(String endpoint, {required FormData formData}) async {
     try {
       return await _dio.post(
@@ -119,7 +109,6 @@ class ApiClient {
   }
 
   // ====== MULTIPART PUT ======
-  // File update er jonno
   Future<Response> putMultipart(String endpoint, {required FormData formData}) async {
     try {
       return await _dio.put(
@@ -134,8 +123,7 @@ class ApiClient {
     }
   }
 
-  // ====== ERROR HANDLER ======
-  // Error handle kore user-friendly message dey
+  //ERROR HANDLER
   Exception _handleError(DioException error) {
     switch (error.type) {
     // Timeout errors
@@ -159,7 +147,7 @@ class ApiClient {
   }
 
 
-  // ====== PARSE ERROR MESSAGE ======
+  // PARSE ERROR MESSAGE
   // Response theke error message extract kore
   String _parseErrorMessage(Response? response) {
     if (response?.data is Map) {

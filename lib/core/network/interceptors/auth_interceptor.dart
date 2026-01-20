@@ -1,6 +1,4 @@
-// =========================================
-// AUTH INTERCEPTOR - Token auto inject kore
-// =========================================
+
 import 'package:dio/dio.dart';
 import 'package:shop_passport/core/constants/storage_keys.dart';
 import 'package:shop_passport/core/services/secure_storage_service.dart';
@@ -10,14 +8,13 @@ class AuthInterceptor extends Interceptor {
 
   AuthInterceptor(this.storage);
 
-  // ✅ FIXED VERSION
   @override
   void onRequest(
       RequestOptions options,
       RequestInterceptorHandler handler,
-      ) async {  // ✅ Make async
+      ) async {  // Make async
     try {
-      // ✅ Await the token
+      //Await the token
       final token = await storage.read(StorageKeys.accessToken);
 
       if (token != null && token.isNotEmpty) {
