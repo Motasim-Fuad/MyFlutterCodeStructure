@@ -1,0 +1,62 @@
+name: shop_passport
+description: Professional Flutter App with Advanced Architecture
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:  # Required for localization
+    sdk: flutter
+
+  # State Management
+  get: ^4.7.3
+
+  # Network
+  dio: ^5.6.0
+
+  # Secure Storage - WHY: Stores sensitive data (tokens) with encryption
+  # Better than GetStorage for security-critical data
+  flutter_secure_storage: ^9.0.0
+
+  # Local Storage - WHY: For non-sensitive data (theme, language preference)
+  # Faster than secure storage, use for non-critical data
+  shared_preferences: ^2.2.2
+
+  # Functional Programming - WHY: Type-safe error handling
+  dartz: ^0.10.1
+
+  # Image
+  cached_network_image: ^3.3.1
+  image_picker: ^1.0.7
+
+  # Logger - WHY: Better debugging with colored logs
+  logger: ^2.0.2
+
+  # Internationalization - WHY: Easy translation management
+  intl: ^0.20.2
+
+  # UI
+  cupertino_icons: ^1.0.8
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  mockito: ^5.4.4
+  build_runner: ^2.4.8
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+
+  # WHY: Enable generate flag for localization
+  generate: true
