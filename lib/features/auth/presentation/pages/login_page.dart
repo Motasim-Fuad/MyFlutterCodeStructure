@@ -3,9 +3,6 @@ import 'package:get/get.dart';
 import '../controllers/auth_controller.dart';
 import '../../../../shared/widgets/custom_button.dart';
 
-// =========================================
-// LOGIN PAGE - UI
-// =========================================
 class LoginPage extends GetView<AuthController> {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -20,7 +17,7 @@ class LoginPage extends GetView<AuthController> {
             children: [
               const SizedBox(height: 60),
 
-              // ====== APP LOGO ======
+              //APP LOGO
               const Icon(
                 Icons.shopping_bag,
                 size: 80,
@@ -28,7 +25,7 @@ class LoginPage extends GetView<AuthController> {
               ),
               const SizedBox(height: 16),
 
-              // ====== APP TITLE ======
+              //APP TITLE
               Text(
                 'Shop Passport',
                 textAlign: TextAlign.center,
@@ -39,7 +36,7 @@ class LoginPage extends GetView<AuthController> {
               ),
               const SizedBox(height: 8),
 
-              // ====== SUBTITLE ======
+              // SUBTITLE
               Text(
                 'Login to continue',
                 textAlign: TextAlign.center,
@@ -49,7 +46,7 @@ class LoginPage extends GetView<AuthController> {
               ),
               const SizedBox(height: 48),
 
-              // ====== EMAIL FIELD ======
+              // EMAIL FIELD
               TextField(
                 controller: controller.emailController,
                 keyboardType: TextInputType.emailAddress,
@@ -63,11 +60,10 @@ class LoginPage extends GetView<AuthController> {
               ),
               const SizedBox(height: 16),
 
-              // ====== PASSWORD FIELD ======
-              // Obx = Observable - isPasswordVisible change hole rebuild hobe
+              //  PASSWORD FIELD
               Obx(() => TextField(
                 controller: controller.passwordController,
-                obscureText: !controller.isPasswordVisible.value, // Show/hide
+                obscureText: !controller.isPasswordVisible.value,
                 decoration: InputDecoration(
                   labelText: 'Password',
                   prefixIcon: const Icon(Icons.lock_outline),
@@ -87,23 +83,22 @@ class LoginPage extends GetView<AuthController> {
               )),
               const SizedBox(height: 24),
 
-              // ====== LOGIN BUTTON ======
-              // Obx - isLoading change hole button update hobe
+              // LOGIN BUTTON
               Obx(() => CustomButton(
                 title: 'Login',
-                onPress: controller.login, // Login method call
-                loading: controller.isLoading.value, // Loading state
+                onPress: controller.login,
+                loading: controller.isLoading.value,
                 loadingText: 'Logging in...',
-                showLoader: true, // Spinner show
-                showLoadingText: true, // Loading text show
+                showLoader: true,
+                showLoadingText: true,
                 height: 56,
-                width: double.infinity, // Full width
+                width: double.infinity,
                 buttonColor: const Color(0xFF2196F3),
               )),
 
               const SizedBox(height: 24),
 
-              // ====== DEMO CREDENTIALS INFO ======
+              //  DEMO CREDENTIALS INFO =====
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(

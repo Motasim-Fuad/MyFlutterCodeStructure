@@ -9,18 +9,17 @@ import '../models/user_model.dart';
 class AuthRemoteDataSource {
   final ApiClient apiClient;
 
-  // ✅ ADDED: Both storage services
-  // WHY: Need separate storages for different data types
+  // Need separate storages for different data types
   final SecureStorageService _secureStorage = SecureStorageService();
   final LocalStorageService _localStorage = LocalStorageService();
 
-  // ✅ FIXED: Removed storageService parameter
+  //FIXED: Removed storageService parameter
   // WHY: Using singleton instances directly
   AuthRemoteDataSource({
     required this.apiClient,
   });
 
-  // ====== LOGIN ======
+  // LOGIN
   Future<UserModel> login(String email, String password) async {
     AppLogger.api(
       ApiEndpoints.login,
@@ -45,24 +44,24 @@ class AuthRemoteDataSource {
         response: 'Login successful',
       );
 
-      // ✅ FIXED: Save tokens to SECURE storage
-      // WHY: Tokens are sensitive data
+      //Save tokens to SECURE storage
+
       if (data['data']?['access'] != null) {
         await _secureStorage.saveAccessToken(data['data']['access']);
-        AppLogger.info('🔐 Access token saved securely');
+        AppLogger.info('Access token saved securely');
       }
 
       if (data['data']?['refresh'] != null) {
         await _secureStorage.saveRefreshToken(data['data']['refresh']);
-        AppLogger.info('🔐 Refresh token saved securely');
+        AppLogger.info(' Refresh token saved securely');
       }
 
-      // ✅ FIXED: Save user data to LOCAL storage
-      // WHY: User info is not sensitive, faster access
+      //Save user data to LOCAL storage
+
       final user = UserModel.fromJson(data['data']['user']);
       await _localStorage.saveUserData(user.toJson());
       await _localStorage.setLoggedIn(true);
-      AppLogger.info('💾 User data saved locally');
+      AppLogger.info(' User data saved locally');
 
       return user;
     } else {
@@ -70,14 +69,13 @@ class AuthRemoteDataSource {
     }
   }
 
-  // ====== LOGOUT ======
+  // LOGOUT
   Future<void> logout() async {
-    AppLogger.info('🧹 Clearing storage...');
+    AppLogger.info('Clearing storage...');
 
-    // ✅ FIXED: Clear both storages
-    // WHY: Need to clear both secure tokens and local data
-    await _secureStorage.deleteTokens(); // Clear tokens from secure storage
-    await _localStorage.clear(); // Clear all local data
+    //Clear both storages
+    await _secureStorage.deleteTokens();
+    await _localStorage.clear();
 
     AppLogger.info('✅ Storage cleared');
   }

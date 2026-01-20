@@ -9,7 +9,7 @@ import '../../domain/repositories/auth_repository.dart';
 import '../../data/models/user_model.dart';
 
 class AuthController extends GetxController {
-  // ====== DEPENDENCIES ======
+  // DEPENDENCIES
   final AuthRepository repository;
 
   // WHY: Directly initialize services (singleton pattern)
@@ -17,30 +17,27 @@ class AuthController extends GetxController {
   final SecureStorageService _secureStorage = SecureStorageService();
   final LocalStorageService _localStorage = LocalStorageService();
 
-  // ❌ REMOVED: storageService parameter
-  // WHY: We're using separate secure and local storage
   AuthController({
     required this.repository,
-    // ❌ REMOVED: this.storageService - Not needed anymore
   });
 
-  // ====== OBSERVABLES ======
+  //OBSERVABLES
   final isLoading = false.obs;
   final Rxn<UserModel> currentUser = Rxn<UserModel>();
 
-  // ====== FORM CONTROLLERS ======
+  //FORM CONTROLLERS
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final isPasswordVisible = false.obs;
 
-  // ====== ON INIT ======
+  //ON INIT
   @override
   void onInit() {
     super.onInit();
     checkLoginStatus();
   }
 
-  // ====== CHECK LOGIN STATUS ======
+  // CHECK LOGIN STATUS
   void checkLoginStatus() async {
     AppLogger.info('🔍 Checking login status...');
 
@@ -66,12 +63,12 @@ class AuthController extends GetxController {
     }
   }
 
-  // ====== TOGGLE PASSWORD VISIBILITY ======
+  // TOGGLE PASSWORD VISIBILITY
   void togglePasswordVisibility() {
     isPasswordVisible.value = !isPasswordVisible.value;
   }
 
-  // ====== LOGIN METHOD ======
+  //LOGIN METHOD
   Future<void> login() async {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
@@ -118,7 +115,7 @@ class AuthController extends GetxController {
     );
   }
 
-  // ====== LOGOUT METHOD ======
+  // LOGOUT METHOD
   Future<void> logout({bool silent = false}) async {
     if (!silent) {
       Get.dialog(
@@ -148,7 +145,7 @@ class AuthController extends GetxController {
     }
   }
 
-  // ====== PERFORM LOGOUT ======
+  //  PERFORM LOGOUT
   Future<void> _performLogout() async {
     isLoading.value = true;
     AppLogger.info('🚪 Logging out...');
@@ -171,7 +168,7 @@ class AuthController extends GetxController {
     );
   }
 
-  // ====== VALIDATE INPUTS ======
+  //  VALIDATE INPUTS
   bool _validateInputs(String email, String password) {
     if (email.isEmpty) {
       Get.snackbar(

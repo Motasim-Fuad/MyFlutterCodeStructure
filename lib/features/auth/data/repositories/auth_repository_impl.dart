@@ -5,26 +5,23 @@ import '../../domain/repositories/auth_repository.dart';
 import '../datasources/auth_remote_datasource.dart';
 import '../models/user_model.dart';
 
-// =========================================
-// AUTH REPOSITORY IMPLEMENTATION
-// =========================================
 // Interface implement kore actual code likhe
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
 
   AuthRepositoryImpl({required this.remoteDataSource});
 
-  // ====== LOGIN IMPLEMENTATION ======
+  // LOGIN IMPLEMENTATION
   @override
   Future<Either<Failure, UserModel>> login(String email, String password) async {
     try {
       // DataSource call koro
       final user = await remoteDataSource.login(email, password);
 
-      // Success - Right diye return koro
+      // Success - Right diye return
       return Right(user);
     } on ServerException catch (e) {
-      // Server error - Left diye return koro
+      // Server error - Left diye return
       return Left(ServerFailure(e.message));
     } catch (e) {
       // Unexpected error
@@ -32,11 +29,11 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  // ====== LOGOUT IMPLEMENTATION ======
+  //LOGOUT IMPLEMENTATION
   @override
   Future<Either<Failure, void>> logout() async {
     try {
-      // DataSource call koro
+      // DataSource call
       await remoteDataSource.logout();
 
       // Success

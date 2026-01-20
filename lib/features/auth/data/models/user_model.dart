@@ -1,13 +1,11 @@
-// =========================================
-// USER MODEL - User er sob information
-// =========================================
+
 class UserModel {
   final int id;
   final String email;
   final String name;
   final String phone;
-  final String? bio; // Nullable - thakleo pare na thaklew pare
-  final String? profilePicture; // Nullable
+  final String? bio;
+  final String? profilePicture;
   final String role;
 
   UserModel({
@@ -20,16 +18,16 @@ class UserModel {
     required this.role,
   });
 
-  // ====== FROM JSON ======
+  //FROM JSON
   // API response theke UserModel create koro
   // Usage: UserModel.fromJson(jsonData)
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      id: json['id'] ?? 0, // Jodi null hoy tahole 0
+      id: json['id'] ?? 0,
       email: json['email'] ?? '',
       name: json['name'] ?? '',
       phone: json['phone'] ?? '',
-      bio: json['bio'], // Nullable, tai ?? chayna
+      bio: json['bio'],
       profilePicture: json['profile_picture'],
       role: json['role'] ?? 'event_admin',
     );
