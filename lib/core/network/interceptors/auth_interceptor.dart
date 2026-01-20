@@ -13,13 +13,13 @@ class AuthInterceptor extends Interceptor {
       RequestInterceptorHandler handler,
       ) async {
     try {
-      // ✅ LOGIN & REGISTER endpoint skip koro - token lagbe na
+      // LOGIN & REGISTER endpoint skip koro - token lagbe na
       final isAuthEndpoint = options.path.contains('/auth/login') ||
           options.path.contains('/auth/register') ||
           options.path.contains('/auth/refresh');
 
       if (isAuthEndpoint) {
-        return handler.next(options); // Token add koro na
+        return handler.next(options);
       }
 
       // Baki shob endpoint e token add koro
