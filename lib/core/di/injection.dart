@@ -23,7 +23,7 @@ import '../../features/profile/presentation/controllers/profile_controller.dart'
 
 class DependencyInjection {
   static Future<void> init() async {
-    // ====== CORE SERVICES ======
+    //  CORE SERVICES
     // WHY: Register core services first
     // These are singletons with fenix flag (always available)
 

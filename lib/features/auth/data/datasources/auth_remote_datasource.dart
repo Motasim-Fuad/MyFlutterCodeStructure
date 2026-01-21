@@ -13,8 +13,6 @@ class AuthRemoteDataSource {
   final SecureStorageService _secureStorage = SecureStorageService();
   final LocalStorageService _localStorage = LocalStorageService();
 
-  //FIXED: Removed storageService parameter
-  // WHY: Using singleton instances directly
   AuthRemoteDataSource({
     required this.apiClient,
   });

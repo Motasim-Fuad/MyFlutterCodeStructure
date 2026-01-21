@@ -58,14 +58,14 @@ void main() {
 
       // assert
 
-      // 1️⃣ Left কিনা চেক
+      // 1 Left checking
       expect(result.isLeft(), true);
 
-      // 2️⃣ Failure এর টাইপ চেক
+      // 2 Failure ar type checking
       final failure = result.fold((l) => l, (_) => null);
       expect(failure, isA<ServerFailure>());
 
-      // 3️⃣ Message ঠিক আছে কিনা (optional but good)
+      // 3 Message checking (optional but good)
       expect((failure as ServerFailure).message, 'Login failed');
     });
 

@@ -1,4 +1,3 @@
-// test/features/events/data/repositories/event_repository_impl_test.dart
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -23,9 +22,6 @@ void main() {
     repository = EventRepositoryImpl(remoteDataSource: mockDataSource);
   });
 
-  // =========================
-  // getMyEvents Tests
-  // =========================
   group('getMyEvents', () {
     final tEventList = [
       EventModel(
@@ -68,7 +64,7 @@ void main() {
       ),
     ];
 
-    test('ডাটাসোর্স থেকে ডাটা সঠিকভাবে আসলে List<EventModel> return করবে', () async {
+    test('If datasource give data then List<EventModel> return properly', () async {
       // Arrange
       when(mockDataSource.getMyEvents()).thenAnswer((_) async => tEventList);
 
@@ -89,7 +85,7 @@ void main() {
       verifyNoMoreInteractions(mockDataSource);
     });
 
-    test('ডাটাসোর্স ServerException throw করলে ServerFailure return করবে', () async {
+    test('The datasource will throw a ServerException and return ServerFailure.', () async {
       // Arrange
       when(mockDataSource.getMyEvents()).thenThrow(ServerException('Server Error'));
 
@@ -111,13 +107,10 @@ void main() {
     });
   });
 
-  // =========================
-  // deleteEvent Tests
-  // =========================
   group('deleteEvent', () {
     const tEventId = 1;
 
-    test('ডিলিট সফল হলে Right(null) return করবে', () async {
+    test('If the delete is successful, it will return Right(null).', () async {
       // Arrange
       when(mockDataSource.deleteEvent(tEventId)).thenAnswer((_) async => Future.value());
 
@@ -129,15 +122,15 @@ void main() {
       result.fold(
             (_) => fail('Expected Right, got Left'),
             (_) {
-          // Right হল void, তাই কিছু করা লাগবে না
-          // শুধু এটি call হল কিনা verify করতে পারি
+          // Right is void, so nothing needs to be done.
+          // I can only verify if it was called.
 
 
-              // Either<Failure, void> এর Right মান void।
+              // Either<Failure, void> has a Right value of void.
               //
-              // Dart এ void value variable এ store করা যাবে না।
+              // In Dart, void value cannot be stored in a variable.
               //
-              // তাই fold এর Right callback এ _ ব্যবহার করো এবং value check করার চেষ্টা করবেন না।
+              //So use _ in fold's Right callback and don't try to check the value.
         },
       );
 
@@ -146,7 +139,7 @@ void main() {
     });
 
 
-    test('ডিলিট করতে গিয়ে ServerException throw হলে Left(ServerFailure) return করবে', () async {
+    test('If a ServerException is thrown while deleting, it will return Left(ServerFailure).', () async {
       // Arrange
       when(mockDataSource.deleteEvent(tEventId))
           .thenThrow(ServerException('Cannot delete event'));
