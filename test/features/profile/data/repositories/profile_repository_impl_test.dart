@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -18,7 +17,7 @@ void main() {
     repository = ProfileRepositoryImpl(remoteDataSource: mockDataSource);
   });
 
-  group('getProfile', ()  {
+  group('getProfile', () {
     final testUser = UserModel(
       id: 1,
       email: "test@test.com",
@@ -41,19 +40,20 @@ void main() {
       verifyNoMoreInteractions(mockDataSource);
     });
 
-    test("should return UserModel when updateProfile is successful",() async {
+    test("should return UserModel when updateProfile is successful", () async {
       //arrange
-      when(mockDataSource.updateProfile(name: "Test User", phone: "1234567890")).thenAnswer((_) async => testUser);
+      when(mockDataSource.updateProfile(name: "Test User", phone: "1234567890"))
+          .thenAnswer((_) async => testUser);
       //act
-      final result=await repository.updateProfile(name: "Test User", phone: "1234567890");
+      final result = await repository.updateProfile(
+          name: "Test User", phone: "1234567890");
       //assert
       expect(result.isRight(), true);
       result.fold((_) => fail('Expected Right, got Left'),
           (result) => expect(result, testUser));
-      verify(mockDataSource.updateProfile(name: "Test User", phone: "1234567890"));
+      verify(
+          mockDataSource.updateProfile(name: "Test User", phone: "1234567890"));
       verifyNoMoreInteractions(mockDataSource);
-
     });
-
   });
 }
